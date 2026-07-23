@@ -1,0 +1,298 @@
+/* ── crt.css ────────────────────────────────────────────────────────────────
+   The shared medium. Palette, glass and decay, carried verbatim from Keraunos
+   so the index and every project subdomain are the same instrument. Nothing
+   page-specific belongs in here — see index.css for that. */
+
+/* ── Tube ───────────────────────────────────────────────────────────────────
+   Light emitted on black. White is reserved: nothing in the interface reaches
+   it except the record currently tuned in. */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --c-void: #0a0a0b;
+  --c-panel: #0f0f11;
+  --c-line: #26262b;
+  --c-land: #4c4c55;
+  --c-dim: #7b7b81;
+  --c-text: #c8c8cc;
+  --c-strike: #ffffff;
+
+  --ink-hot: #ffffff;
+  --ink-rest: #c8c8cc;
+  --scan: rgba(255, 255, 255, 0.05);
+  --sweep: rgba(255, 255, 255, 0.028);
+  --roll: rgba(255, 255, 255, 0.055);
+  --roll-soft: rgba(255, 255, 255, 0.02);
+  --vignette: rgba(0, 0, 0, 0.62);
+  --bloom: rgba(255, 255, 255, 0.14);
+  --bloom-hot: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Paper ──────────────────────────────────────────────────────────────────
+   The other readout: ink on a chart recorder's roll. A tube cannot be
+   inverted, so light mode changes medium instead. Black takes over the
+   reserved role; cool neutral stock, never cream. */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --c-void: #dedee0;
+  --c-panel: #e7e7e9;
+  --c-line: #c2c2c6;
+  --c-land: #9a9aa2;
+  --c-dim: #626268;
+  --c-text: #2a2a2e;
+  --c-strike: #000000;
+
+  --ink-hot: #000000;
+  --ink-rest: #2a2a2e;
+  --scan: rgba(0, 0, 0, 0.045);
+  --sweep: rgba(0, 0, 0, 0.022);
+  --roll: rgba(0, 0, 0, 0.04);
+  --roll-soft: rgba(0, 0, 0, 0.015);
+  --vignette: rgba(0, 0, 0, 0.14);
+  /* Ink bleeds into paper fibres rather than glowing. */
+  --bloom: rgba(0, 0, 0, 0.16);
+  --bloom-hot: rgba(0, 0, 0, 0.28);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--c-void);
+  color: var(--c-text);
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  font-size: 12px;
+  line-height: 18px;
+  /* Digits must not jitter as readouts tick. */
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 1px solid var(--c-text);
+  outline-offset: 2px;
+}
+
+/* ── Phosphor bloom ─────────────────────────────────────────────────────────
+   Lit pixels bleed into the glass. Reserved for live values, never for
+   labels: the glow marks what is actually reading. */
+.glow {
+  text-shadow: 0 0 6px var(--bloom);
+}
+
+.glow-hot {
+  text-shadow: 0 0 10px var(--bloom-hot);
+}
+
+/* ── The decay rule ─────────────────────────────────────────────────────────
+   Anything that arrives comes in at full white and settles into the gray of
+   the interface. */
+@keyframes settle {
+  from {
+    color: var(--ink-hot);
+    text-shadow: 0 0 10px var(--bloom-hot);
+  }
+  to {
+    color: var(--ink-rest);
+    text-shadow: 0 0 6px var(--bloom);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes seek {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.settle {
+  animation: settle 1.4s ease-out;
+}
+
+.breathe {
+  animation: breathe 2.8s ease-in-out infinite;
+}
+
+.seek {
+  animation: seek 1.6s ease-in-out infinite;
+}
+
+/* ── The glass ──────────────────────────────────────────────────────────────
+   Sits above everything, catches no pointer events, and is the only place the
+   retro treatment lives — the page underneath stays clean. */
+.crt {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.crt-scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--scan) 0px,
+    var(--scan) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.crt-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(125% 105% at 50% 50%, transparent 52%, var(--vignette) 100%);
+}
+
+@keyframes refresh-sweep {
+  from {
+    transform: translateY(-14vh);
+  }
+  to {
+    transform: translateY(104vh);
+  }
+}
+
+.crt-sweep {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 14vh;
+  background: linear-gradient(to bottom, transparent, var(--sweep), transparent);
+  animation: refresh-sweep 7.5s linear infinite;
+}
+
+/* Vertical hold never quite holds. Here it is not ambient: the band is thrown
+   only when the tuning changes, so the glitch reads as the set relocking. */
+@keyframes tracking-roll {
+  0% {
+    transform: translateY(105%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+}
+
+.crt-roll {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 46px;
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--roll-soft) 35%,
+    var(--roll) 50%,
+    var(--roll-soft) 65%,
+    transparent
+  );
+}
+
+.crt-roll.rolling {
+  animation: tracking-roll 620ms linear;
+}
+
+/* ── HUD frame ──────────────────────────────────────────────────────────────
+   Corner ticks instead of full borders: the frame reads as an instrument
+   bezel and leaves the edges open. */
+.tick {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: var(--c-land);
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+
+.tick.tl {
+  top: 0;
+  left: 0;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.tick.tr {
+  top: 0;
+  right: 0;
+  border-top-width: 1px;
+  border-right-width: 1px;
+}
+
+.tick.bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+}
+
+.tick.br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--c-line);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--c-land);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle,
+  .breathe,
+  .seek,
+  .crt-sweep,
+  .crt-roll,
+  .crt-roll.rolling {
+    animation: none;
+  }
+}

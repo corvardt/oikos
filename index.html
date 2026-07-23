@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/glyph.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#dedee0" media="(prefers-color-scheme: light)" />
+    <meta name="description" content="unmod.fun — an index of projects, tuned like channels on a tube." />
+    <title>unmod</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/crt.css" />
+    <link rel="stylesheet" href="/index.css" />
+    <script>
+      // Resolve the medium before first paint so the tube never flashes on
+      // paper. The cookie is written on `.unmod.fun`, so a choice made on any
+      // project carries here and back again.
+      (function () {
+        var m = document.cookie.match(/(?:^|;\s*)unmod-theme=(dark|light)/);
+        var t = m ? m[1] : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="tube">
+      <header class="head">
+        <div class="mark">
+          <span class="wordmark glow">UNMOD</span>
+          <span class="label">&#47;&#47; index</span>
+        </div>
+
+        <nav class="controls">
+          <button type="button" class="label" data-medium>tube</button>
+          <span class="rule" aria-hidden="true"></span>
+          <a class="label" href="https://github.com/corvardt" target="_blank" rel="noreferrer">src</a>
+          <a class="label" href="https://twitter.com/covardt" target="_blank" rel="noreferrer">x</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="operator">
+          <figure class="portrait">
+            <img src="/portrait.jpg" width="283" height="283" alt="corvardt" />
+            <span class="tick tl"></span>
+            <span class="tick tr"></span>
+            <span class="tick bl"></span>
+            <span class="tick br"></span>
+          </figure>
+
+          <div class="ident">
+            <div class="foot">
+              <span class="label">operator</span>
+              <span class="label">js/ts · python · solidity · swift</span>
+            </div>
+            <p>
+              <span class="who">CORVARDT</span> — I build tools and experiments around mobile,
+              Web3 and decentralized systems. Mostly interested in keeping control of my own data.
+            </p>
+            <p class="creed">
+              Working towards digital sovereignty, decentralization and free speech.
+            </p>
+          </div>
+        </section>
+
+        <ul class="records"></ul>
+      </main>
+
+      <footer class="footer">
+        <span class="label" data-count></span>
+        <span class="keys" aria-hidden="true">
+          <kbd>↑↓ tune</kbd>
+          <kbd>↵ open</kbd>
+          <kbd>t medium</kbd>
+        </span>
+      </footer>
+    </div>
+
+    <!-- The glass. Above everything, catches nothing. -->
+    <div class="crt" aria-hidden="true">
+      <div class="crt-sweep"></div>
+      <div class="crt-roll"></div>
+      <div class="crt-scanlines"></div>
+      <div class="crt-vignette"></div>
+    </div>
+
+    <script type="module" src="/index.js"></script>
+  </body>
+</html>
