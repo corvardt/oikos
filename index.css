@@ -280,6 +280,17 @@ a.label:hover {
   box-shadow: inset 0 0 0 1px var(--c-land);
 }
 
+/* Not on air and not meant to be: it runs on your own machine. The round
+   indicator belongs to things being received, so this one is square. */
+.record[data-status='local'] .dot {
+  border-radius: 0;
+  background: var(--c-land);
+}
+
+.record.tuned[data-status='local'] .dot {
+  background: var(--c-text);
+}
+
 /* ── Vacant ─────────────────────────────────────────────────────────────────
    An unassigned channel is not filler: it is what the set does with a station
    that has not been built yet, and it says where the next one goes. */

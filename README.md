@@ -38,9 +38,18 @@ counts them itself.
   desc: 'Two lines at most. What it does, not why it matters.',
   host: 'name.unmod.fun',
   stack: 'react · d3 · websocket',
-  status: 'live',          // or 'building'
+  status: 'live',
 }
 ```
+
+| status | | indicator |
+| --- | --- | --- |
+| `live` | on air at its own host | filled dot, white when tuned |
+| `building` | on the way | hollow ring |
+| `local` | runs on your own machine, not hosted | square, since the round indicator belongs to what is being received |
+
+A `local` record points at wherever it actually is — usually its repository —
+rather than at a subdomain that would never answer.
 
 An entry of `{ vacant: true }` holds a channel number without a station, if a
 placeholder is ever wanted. The catalogue currently runs without one.

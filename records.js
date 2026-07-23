@@ -2,8 +2,9 @@
    The catalogue. Adding a project is one entry here plus a CNAME; the page
    numbers the channels and counts them itself.
 
-   status — 'live' | 'building'. An entry of `{ vacant: true }` holds a channel
-   number without a station, if the catalogue ever wants to show one. */
+   status — 'live' is on air at its own host, 'building' is on the way, 'local'
+   runs on your own machine and is not hosted anywhere. An entry of
+   `{ vacant: true }` holds a channel number without a station. */
 
 export const RECORDS = [
   {
@@ -18,10 +19,10 @@ export const RECORDS = [
     name: 'NOSTOS',
     etym: 'νόστος — the homecoming',
     desc: 'A media downloader that runs on your own machine. Paste a link, see what it is, queue it — nothing is sent anywhere but the site you are pulling from.',
-    // No hosted instance to point at yet: the address is wherever the thing
-    // actually is, and today that is the repository.
+    // It is not meant to be hosted, so the address is where the thing actually
+    // is: the repository you clone it from.
     host: 'github.com/corvardt/nostos',
     stack: 'python · fastapi · react · yt-dlp',
-    status: 'building',
+    status: 'local',
   },
 ];
