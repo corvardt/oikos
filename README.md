@@ -7,7 +7,8 @@ A short body of work is not a grid of cards — it is a set of channels you tune
 between, so the page is one tube and each project is a station on it. Only the
 tuned record is allowed to reach white.
 
-No build, no dependencies. Four static files and a font.
+No build, no dependencies, nothing fetched from anyone else. Static files and a
+typeface served from the same origin as the page.
 
 ## Running
 
@@ -22,7 +23,7 @@ has to be served — opening `index.html` from disk will not work.
 
 | | |
 | --- | --- |
-| **Point** | Hovering a record tunes it; the row lights, its corner ticks appear, and the vertical hold slips as the set relocks |
+| **Point** | Hovering a record tunes it: the row lights and its corner ticks appear. Tuning is silent — the only motion on the glass is ambient, so running the pointer down the list sets nothing off |
 | **Keys** | `↑` `↓` or `j` `k` tune · `1`–`9` jump to a channel · `↵` open · `t` switch medium |
 | **Medium** | `tube` is phosphor on black, `paper` is ink on chart stock. The choice is a cookie on `.unmod.fun`, so it carries to every project subdomain |
 
@@ -58,7 +59,8 @@ placeholder is ever wanted. The catalogue currently runs without one.
 
 | Path | Role |
 | --- | --- |
-| `crt.css` | The shared medium: both palettes, the glass, the decay rule, the corner ticks. Carried verbatim from Keraunos and meant to be copied into each project unchanged |
+| `crt.css` | The shared medium: the typeface, both palettes, the glass, the decay rule, the corner ticks. Carried verbatim from Keraunos and meant to be copied into each project unchanged, with `fonts/` alongside it |
+| `fonts/` | IBM Plex Mono, three weights, latin and latin-ext |
 | `index.css` | This page only — the operator, the tuner, the records |
 | `portrait.jpg` | The operator's plate, composited into whichever medium is on |
 | `records.js` | The catalogue |
@@ -87,7 +89,16 @@ black plate falls away and the figure reads as emitted light; inverted and
 multiplied on paper, so it reads as ink in the stock. It is held just below the
 interface white, which belongs to the tuned record.
 
-Everything animated is switched off under `prefers-reduced-motion`.
+The typeface is served from this origin. A page whose creed line is about
+keeping control of your own data should not hand every visitor's IP to Google
+for a font, and the self-hosted files also drop two preconnects and a
+render-blocking third-party stylesheet from the head. Plex Mono ships no Greek
+subset, so the etymologies render in the system mono — as they always did, via
+Google or not.
+
+Everything animated is switched off under `prefers-reduced-motion`. Nothing is
+animated in response to tuning: a pointer crossing the list would fire that on
+every row it passed, which read as a stutter rather than as an instrument.
 
 ## Deploying
 

@@ -8,12 +8,10 @@
     <meta name="theme-color" content="#dedee0" media="(prefers-color-scheme: light)" />
     <meta name="description" content="unmod.fun — an index of projects, tuned like channels on a tube." />
     <title>unmod</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- The two weights the first screen is built from, fetched in parallel with
+         the stylesheet that declares them rather than after it. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-400-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-600-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/crt.css" />
     <link rel="stylesheet" href="/index.css" />
     <script>
@@ -84,7 +82,6 @@
     <!-- The glass. Above everything, catches nothing. -->
     <div class="crt" aria-hidden="true">
       <div class="crt-sweep"></div>
-      <div class="crt-roll"></div>
       <div class="crt-scanlines"></div>
       <div class="crt-vignette"></div>
     </div>

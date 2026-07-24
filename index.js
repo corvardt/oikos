@@ -1,13 +1,13 @@
 /* ── index.js ───────────────────────────────────────────────────────────────
    The tuner. One record is tuned at a time; pointer and keyboard both move it,
-   because on this page they mean the same thing. Changing station throws the
-   vertical-hold band, the way a set does when it relocks. */
+   because on this page they mean the same thing. Tuning itself is silent — the
+   only motion on the glass is ambient, so a pointer crossing the list cannot
+   set anything off. */
 
 import { RECORDS } from './records.js';
 import { apply, current, followSystem } from './theme.js';
 
 const list = document.querySelector('.records');
-const roll = document.querySelector('.crt-roll');
 const medium = document.querySelector('[data-medium]');
 const count = document.querySelector('[data-count]');
 
@@ -64,7 +64,7 @@ rows.forEach((row, i) => {
 const live = tunable.filter((s) => s.status === 'live').length;
 count.textContent = `${stations.length} ${stations.length === 1 ? 'channel' : 'channels'} · ${live} live`;
 
-function tune(next, { glitch = true, focus = false } = {}) {
+function tune(next, { focus = false } = {}) {
   const index = (next + rows.length) % rows.length;
   // Tuning by key moves focus with it, so `Enter` always opens what is lit.
   if (focus) rows[index].focus();
@@ -73,16 +73,9 @@ function tune(next, { glitch = true, focus = false } = {}) {
   rows.forEach((row) => row.classList.remove('tuned'));
   rows[index].classList.add('tuned');
   tuned = index;
-
-  if (!glitch) return;
-  roll.classList.remove('rolling');
-  // Reading offsetWidth restarts the animation; without it a second change
-  // inside one cycle is silently ignored.
-  void roll.offsetWidth;
-  roll.classList.add('rolling');
 }
 
-tune(0, { glitch: false });
+tune(0);
 
 rows.forEach((row, i) => {
   row.addEventListener('pointerenter', () => tune(i));

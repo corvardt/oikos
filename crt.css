@@ -3,6 +3,81 @@
    so the index and every project subdomain are the same instrument. Nothing
    page-specific belongs in here — see index.css for that. */
 
+/* ── Type ───────────────────────────────────────────────────────────────────
+   Served from this origin, not from Google. A page whose creed line is about
+   keeping control of your own data has no business handing every visitor's IP
+   to a third party for a typeface. The files travel with this stylesheet: copy
+   `fonts/` alongside it into each project.
+
+   Latin and latin-ext only — Plex Mono ships no Greek, so the etymologies fall
+   to the system mono either way, and `unicode-range` keeps latin-ext off the
+   wire until something actually needs it. */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 /* ── Tube ───────────────────────────────────────────────────────────────────
    Light emitted on black. White is reserved: nothing in the interface reaches
    it except the record currently tuned in. */
@@ -22,8 +97,6 @@
   --ink-rest: #c8c8cc;
   --scan: rgba(255, 255, 255, 0.05);
   --sweep: rgba(255, 255, 255, 0.028);
-  --roll: rgba(255, 255, 255, 0.055);
-  --roll-soft: rgba(255, 255, 255, 0.02);
   --vignette: rgba(0, 0, 0, 0.62);
   --bloom: rgba(255, 255, 255, 0.14);
   --bloom-hot: rgba(255, 255, 255, 0.3);
@@ -48,8 +121,6 @@
   --ink-rest: #2a2a2e;
   --scan: rgba(0, 0, 0, 0.045);
   --sweep: rgba(0, 0, 0, 0.022);
-  --roll: rgba(0, 0, 0, 0.04);
-  --roll-soft: rgba(0, 0, 0, 0.015);
   --vignette: rgba(0, 0, 0, 0.14);
   /* Ink bleeds into paper fibres rather than glowing. */
   --bloom: rgba(0, 0, 0, 0.16);
@@ -189,45 +260,6 @@ body {
   animation: refresh-sweep 7.5s linear infinite;
 }
 
-/* Vertical hold never quite holds. Here it is not ambient: the band is thrown
-   only when the tuning changes, so the glitch reads as the set relocking. */
-@keyframes tracking-roll {
-  0% {
-    transform: translateY(105%);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-20%);
-    opacity: 0;
-  }
-}
-
-.crt-roll {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 46px;
-  opacity: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--roll-soft) 35%,
-    var(--roll) 50%,
-    var(--roll-soft) 65%,
-    transparent
-  );
-}
-
-.crt-roll.rolling {
-  animation: tracking-roll 620ms linear;
-}
-
 /* ── HUD frame ──────────────────────────────────────────────────────────────
    Corner ticks instead of full borders: the frame reads as an instrument
    bezel and leaves the edges open. */
@@ -290,9 +322,7 @@ body {
   .settle,
   .breathe,
   .seek,
-  .crt-sweep,
-  .crt-roll,
-  .crt-roll.rolling {
+  .crt-sweep {
     animation: none;
   }
 }
