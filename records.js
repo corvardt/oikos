@@ -25,4 +25,12 @@ export const RECORDS = [
     stack: 'python · fastapi · react · yt-dlp',
     status: 'local',
   },
+  {
+    name: 'TYCHE',
+    etym: 'τύχη · fortune, the lot that falls',
+    desc: 'Forty random Ethereum keypairs a roll, read against the chain. A free lottery at one in 2^160, played on a contact sheet. Nothing has ever been found and that is most of the point.',
+    host: 'tyche.unmod.fun',
+    stack: 'react · ethers · etherscan',
+    status: 'building',
+  },
 ];
