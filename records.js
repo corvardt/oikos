@@ -31,6 +31,6 @@ export const RECORDS = [
     desc: 'Forty random Ethereum keypairs a roll, read against the chain. A free lottery at one in 2^160, played on a contact sheet. Nothing has ever been found and that is most of the point.',
     host: 'tyche.unmod.fun',
     stack: 'react · ethers · etherscan',
-    status: 'building',
+    status: 'live',
   },
 ];
