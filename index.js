@@ -70,8 +70,12 @@ function tune(next, { focus = false } = {}) {
   if (focus) rows[index].focus();
   if (index === tuned && rows[tuned].classList.contains('tuned')) return;
 
-  rows.forEach((row) => row.classList.remove('tuned'));
+  rows.forEach((row) => {
+    row.classList.remove('tuned');
+    row.removeAttribute('aria-current');
+  });
   rows[index].classList.add('tuned');
+  rows[index].setAttribute('aria-current', 'true');
   tuned = index;
 }
 

@@ -29,8 +29,8 @@ has to be served — opening `index.html` from disk will not work.
 
 ## Adding a project
 
-One entry in `records.js` and a DNS record. The page numbers the channels and
-counts them itself.
+One entry in `records.js`, a DNS record, and `python3 og.py`. The page numbers
+the channels and counts them itself.
 
 ```js
 {
@@ -64,6 +64,8 @@ placeholder is ever wanted. The catalogue currently runs without one.
 | `index.css` | This page only — the operator, the tuner, the records |
 | `portrait.jpg` | The operator's plate, composited into whichever medium is on |
 | `records.js` | The catalogue |
+| `og.py` | Draws `og.png`, the card the index unfurls as. Run by hand, not a build step |
+| `og.png` | 1200×630, committed. Regenerate it whenever the catalogue changes |
 | `index.js` | Renders the records and runs the tuning |
 | `theme.js` | Medium selection, stored domain-wide |
 
@@ -95,6 +97,14 @@ for a font, and the self-hosted files also drop two preconnects and a
 render-blocking third-party stylesheet from the head. Plex Mono ships no Greek
 subset, so the etymologies render in the system mono — as they always did, via
 Google or not.
+
+The unfurl card is drawn from `records.js` rather than maintained beside it, so
+it cannot advertise a station the page does not have. It is the only thing here
+that needs a dependency (Pillow), which is why it runs on your machine and
+commits its output instead of running at deploy: visitors get a PNG, and the
+repo keeps its promise of no build. The card lists at most four stations and
+tightens its rows as they are added, dropping the stack lines rather than
+letting them print through each other; past four, the tally carries the rest.
 
 Everything animated is switched off under `prefers-reduced-motion`. Nothing is
 animated in response to tuning: a pointer crossing the list would fire that on

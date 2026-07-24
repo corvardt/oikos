@@ -6,8 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#dedee0" media="(prefers-color-scheme: light)" />
-    <meta name="description" content="unmod.fun — an index of projects, tuned like channels on a tube." />
+    <meta name="description" content="unmod.fun · an index of projects, tuned like channels on a tube." />
     <title>unmod</title>
+
+    <!-- The unfurl. `og.png` is drawn by `og.py` from the same catalogue the
+         page renders, so the card cannot claim a station that is not here. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://unmod.fun/" />
+    <meta property="og:title" content="unmod // index" />
+    <meta
+      property="og:description"
+      content="An index of projects, tuned like channels on a tube."
+    />
+    <meta property="og:image" content="https://unmod.fun/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="The unmod index on a black tube: the wordmark, then each project as a numbered channel with its stack and whether it is on air."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@covardt" />
     <!-- The two weights the first screen is built from, fetched in parallel with
          the stylesheet that declares them rather than after it. -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-400-latin.woff2" crossorigin />
@@ -57,7 +76,7 @@
               <span class="label">js/ts · python · solidity · swift</span>
             </div>
             <p>
-              <span class="who">CORVARDT</span> — I build tools and experiments around mobile,
+              <span class="who">CORVARDT</span>. I build tools and experiments around mobile,
               Web3 and decentralized systems. Mostly interested in keeping control of my own data.
             </p>
             <p class="creed">

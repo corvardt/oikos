@@ -9,7 +9,7 @@
 export const RECORDS = [
   {
     name: 'KERAUNOS',
-    etym: 'κεραυνός — the thunderbolt',
+    etym: 'κεραυνός · the thunderbolt',
     desc: 'Live global lightning strikes, streamed from the Blitzortung network and plotted on a world map as a phosphor instrument.',
     host: 'keraunos.unmod.fun',
     stack: 'react · d3 · websocket',
@@ -17,8 +17,8 @@ export const RECORDS = [
   },
   {
     name: 'NOSTOS',
-    etym: 'νόστος — the homecoming',
-    desc: 'A media downloader that runs on your own machine. Paste a link, see what it is, queue it — nothing is sent anywhere but the site you are pulling from.',
+    etym: 'νόστος · the homecoming',
+    desc: 'A media downloader that runs on your own machine. Paste a link, see what it is, queue it. Nothing is sent anywhere but the site you are pulling from.',
     // It is not meant to be hosted, so the address is where the thing actually
     // is: the repository you clone it from.
     host: 'github.com/corvardt/nostos',
