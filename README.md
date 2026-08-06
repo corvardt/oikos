@@ -2,7 +2,7 @@
 
 οἶκος — the household.
 
-The index at [unmod.fun](https://unmod.fun), and the place the projects live.
+The index at [corvardt.com](https://corvardt.com), and the place the projects live.
 A short body of work is not a grid of cards — it is a set of channels you tune
 between, so the page is one tube and each project is a station on it. Only the
 tuned record is allowed to reach white.
@@ -25,7 +25,7 @@ has to be served — opening `index.html` from disk will not work.
 | --- | --- |
 | **Point** | Hovering a record tunes it: the row lights and its corner ticks appear. Tuning is silent — the only motion on the glass is ambient, so running the pointer down the list sets nothing off |
 | **Keys** | `↑` `↓` or `j` `k` tune · `1`–`9` jump to a channel · `↵` open · `t` switch medium |
-| **Medium** | `tube` is phosphor on black, `paper` is ink on chart stock. The choice is a cookie on `.unmod.fun`, so it carries to every project subdomain |
+| **Medium** | `tube` is phosphor on black, `paper` is ink on chart stock. The choice is a cookie on `.corvardt.com`, so it carries to every project subdomain |
 
 ## Adding a project
 
@@ -37,7 +37,7 @@ the channels and counts them itself.
   name: 'NAME',
   etym: 'ἔτυμον — what it means',
   desc: 'Two lines at most. What it does, not why it matters.',
-  host: 'name.unmod.fun',
+  host: 'name.corvardt.com',
   stack: 'react · d3 · websocket',
   status: 'live',
 }
@@ -80,11 +80,12 @@ else in the interface is allowed to reach it; in `paper` black takes over that
 role. The whole page is otherwise built out of `dim`, `land` and `text`.
 
 The medium is resolved by an inline script in the head, before first paint, so
-the tube never flashes on paper. It reads a cookie scoped to `.unmod.fun`
+the tube never flashes on paper. It reads a cookie scoped to `.corvardt.com`
 rather than `localStorage`, which is per-origin and would not survive the jump
-to a subdomain. Keraunos needs a matching fallback in its own head script for
-the handoff to work in both directions — it currently reads
-`keraunos-theme`/`lightning-theme` out of `localStorage`.
+to a subdomain. The cookie is named `corvardt-theme`; each project needs a
+matching read in its own head script for the handoff to work in both
+directions — Keraunos currently reads `keraunos-theme`/`lightning-theme` out of
+`localStorage`.
 
 The portrait is composited rather than pasted on: screened on the tube, so the
 black plate falls away and the figure reads as emitted light; inverted and

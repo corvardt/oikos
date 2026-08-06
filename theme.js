@@ -1,15 +1,15 @@
 /* ── theme.js ───────────────────────────────────────────────────────────────
    Two media, not one palette inverted. The choice is written to a cookie on
-   `.unmod.fun` rather than localStorage, so it carries from the index to every
+   `.corvardt.com` rather than localStorage, so it carries from the index to every
    project subdomain: the whole domain behaves as one set, not as several.
 
    Loaded with `defer`; the medium itself is resolved by the inline script in
    the document head, before first paint, so the tube never flashes on paper. */
 
-const KEY = 'unmod-theme';
+const KEY = 'corvardt-theme';
 
 export function store(theme) {
-  const domain = location.hostname.endsWith('unmod.fun') ? '; domain=.unmod.fun' : '';
+  const domain = location.hostname.endsWith('corvardt.com') ? '; domain=.corvardt.com' : '';
   // One year, root path, so every subdomain reads the same value.
   document.cookie = `${KEY}=${theme}; path=/; max-age=31536000; samesite=lax${domain}`;
 }

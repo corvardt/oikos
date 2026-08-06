@@ -98,9 +98,9 @@ def build():
 
     # ── Wordmark. The only white on the card, and it blooms. ────────────────
     bloom = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    tracked(ImageDraw.Draw(bloom), (MARGIN + 34, 118), "UNMOD", mark, (255, 255, 255, 90), 0.22)
+    tracked(ImageDraw.Draw(bloom), (MARGIN + 34, 118), "OIKOS", mark, (255, 255, 255, 90), 0.22)
     card.alpha_composite(bloom.filter(ImageFilter.GaussianBlur(18)))
-    width = tracked(draw, (MARGIN + 34, 118), "UNMOD", mark, STRIKE, 0.22)
+    width = tracked(draw, (MARGIN + 34, 118), "OIKOS", mark, STRIKE, 0.22)
     tracked(draw, (MARGIN + 34 + width + 26, 176), "// INDEX", label, DIM, 0.14)
 
     draw.line([(MARGIN + 34, 250), (W - MARGIN - 34, 250)], fill=LINE, width=1)
@@ -150,7 +150,7 @@ def build():
     live = sum(1 for s in entries if s and s["status"] == "live")
     total = len(entries)
     draw.line([(MARGIN + 34, H - 152), (W - MARGIN - 34, H - 152)], fill=LINE, width=1)
-    tracked(draw, (MARGIN + 34, H - 128), "UNMOD.FUN", label, TEXT, 0.14)
+    tracked(draw, (MARGIN + 34, H - 128), "CORVARDT.COM", label, TEXT, 0.14)
     tally = f"{total} {'CHANNEL' if total == 1 else 'CHANNELS'} · {live} LIVE"
     tracked(draw, (W - MARGIN - 34, H - 128), tally, label, DIM, 0.14, anchor_right=True)
 
