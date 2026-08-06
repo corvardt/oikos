@@ -215,23 +215,13 @@ body {
 
 /* ── The glass ──────────────────────────────────────────────────────────────
    Sits above everything, catches no pointer events, and is the only place the
-   retro treatment lives — the page underneath stays clean.
-
-   Held on its own compositor layer deliberately. The sweep below animates a
-   transform, which the browser promotes on its own while the animation runs;
-   left to itself it promotes the moving band *out of* the page's layer, and
-   the page is left painting around a hole that travels. Change the palette in
-   that moment and the strip behind the band can keep the medium it had — a
-   band of tube across a page that is otherwise paper. Declaring the glass a
-   layer up front keeps the sweep's promotion inside it, so the document below
-   stays one surface and repaints whole. */
+   retro treatment lives — the page underneath stays clean. */
 .crt {
   position: fixed;
   inset: 0;
   z-index: 50;
   overflow: hidden;
   pointer-events: none;
-  will-change: transform;
 }
 
 .crt-scanlines {
@@ -268,10 +258,6 @@ body {
   height: 14vh;
   background: linear-gradient(to bottom, transparent, var(--sweep), transparent);
   animation: refresh-sweep 7.5s linear infinite;
-  /* Promoted from the first frame rather than at the moment the animation is
-     noticed: a layer that appears and disappears mid-repaint is what loses the
-     strip. */
-  will-change: transform;
 }
 
 /* ── HUD frame ──────────────────────────────────────────────────────────────
@@ -338,11 +324,5 @@ body {
   .seek,
   .crt-sweep {
     animation: none;
-  }
-
-  /* Nothing moves, so nothing needs a layer of its own. */
-  .crt,
-  .crt-sweep {
-    will-change: auto;
   }
 }

@@ -22,9 +22,9 @@ export function current() {
    drift from another. Applied synchronously: anything reading computed style
    must see the new palette on the same frame the label changes.
 
-   A flip used to leave a band of the old medium behind — that was the glass
-   splitting the page into layers as its sweep animated, and it is fixed in
-   crt.css where the layers are declared, not worked around from here. */
+   Nothing here forces a repaint. A band of the old medium surviving a flip
+   looked like it belonged to this function, but it was a record keeping a
+   panel it had given up, and it is fixed where the records are drawn. */
 function set(theme) {
   document.documentElement.dataset.theme = theme;
   return theme;
