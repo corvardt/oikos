@@ -151,6 +151,13 @@ a.label:hover {
   list-style: none;
 }
 
+/* Each record is its own surface. Tuning repaints a record's full width, and a
+   pointer crossing the list upward hands that repaint from one record to the
+   one *above* it — backwards through the order the page is painted in, which is
+   where the browser's merging of those regions goes wrong and leaves a record
+   still wearing the panel it just gave up: a band exactly one record tall.
+   Given a surface of its own, a record's tuning is a property of that surface
+   and never asks the page beneath it to repaint at all. */
 .record {
   position: relative;
   display: grid;
@@ -161,6 +168,7 @@ a.label:hover {
   color: inherit;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  transform: translateZ(0);
 }
 
 .record + .record {
