@@ -78,7 +78,7 @@
     U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* ── Tube ───────────────────────────────────────────────────────────────────
+/* ── Dark ───────────────────────────────────────────────────────────────────
    Light emitted on black. White is reserved: nothing in the interface reaches
    it except the record currently tuned in. */
 :root,
@@ -102,7 +102,7 @@
   --bloom-hot: rgba(255, 255, 255, 0.3);
 }
 
-/* ── Paper ──────────────────────────────────────────────────────────────────
+/* ── Light ──────────────────────────────────────────────────────────────────
    The other readout: ink on a chart recorder's roll. A tube cannot be
    inverted, so light mode changes medium instead. Black takes over the
    reserved role; cool neutral stock, never cream. */

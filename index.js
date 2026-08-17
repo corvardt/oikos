@@ -111,15 +111,15 @@ document.addEventListener('keydown', (event) => {
 });
 
 // ── Medium ─────────────────────────────────────────────────────────────────
-// The control is named for what it switches to, not for "light" and "dark".
+// The control is named for what it switches to.
 function setMedium(theme) {
   apply(theme);
   label(theme);
 }
 
 function label(theme) {
-  medium.textContent = theme === 'dark' ? 'tube' : 'paper';
-  medium.setAttribute('aria-label', `switch to ${theme === 'dark' ? 'paper' : 'tube'}`);
+  medium.textContent = theme;
+  medium.setAttribute('aria-label', `switch to ${theme === 'dark' ? 'light' : 'dark'}`);
 }
 
 label(current());

@@ -25,7 +25,7 @@ has to be served — opening `index.html` from disk will not work.
 | --- | --- |
 | **Point** | Hovering a record tunes it: the row lights and its corner ticks appear. Tuning is silent — the only motion on the glass is ambient, so running the pointer down the list sets nothing off |
 | **Keys** | `↑` `↓` or `j` `k` tune · `1`–`9` jump to a channel · `↵` open · `t` switch medium |
-| **Medium** | `tube` is phosphor on black, `paper` is ink on chart stock. The choice is a cookie on `.corvardt.com`, so it carries to every project subdomain |
+| **Medium** | `dark` is phosphor on black, `light` is ink on chart stock. The choice is a cookie on `.corvardt.com`, so it carries to every project subdomain |
 
 ## Adding a project
 
@@ -75,8 +75,8 @@ The palette, the glass and the decay rule are lifted from Keraunos rather than
 re-derived, so the index and the projects cannot drift apart. If a token
 changes there, it changes here.
 
-White is reserved. In `tube` it belongs to the record you are on, and nothing
-else in the interface is allowed to reach it; in `paper` black takes over that
+White is reserved. In `dark` it belongs to the record you are on, and nothing
+else in the interface is allowed to reach it; in `light` black takes over that
 role. The whole page is otherwise built out of `dim`, `land` and `text`.
 
 The medium is resolved by an inline script in the head, before first paint, so
