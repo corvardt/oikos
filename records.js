@@ -33,4 +33,12 @@ export const RECORDS = [
     stack: 'react · ethers · etherscan',
     status: 'live',
   },
+  {
+    name: 'KLEPSYDRA',
+    etym: 'κλεψύδρα · the water clock, the allotted time draining',
+    desc: 'An always-on desktop card that reads your Claude usage off your own machine: the rolling window, the burn rate, where the block lands. Six hundred lines of plain Python, auditable in one sitting.',
+    host: 'github.com/corvardt/klepsydra',
+    stack: 'python · gtk4',
+    status: 'local',
+  },
 ];
