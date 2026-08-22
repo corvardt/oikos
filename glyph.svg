@@ -1,12 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-  <!-- Squared, drawn as a path rather than set as type: nothing in this
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- The index at 16px: the wordmark's one letter, on the tube. The tile
+       carries its own ground, as Keraunos' and Tyche's do. A bare glyph has to
+       guess the colour of the tab bar, and the only tool for that is a
+       prefers-color-scheme query inside the SVG, which browsers resolve
+       inconsistently for an icon and Safari has never been reliable about. A
+       dark tile is legible against light chrome and dark chrome alike, and it
+       is what the page looks like anyway.
+
+       Squared, and drawn as a path rather than set as type: nothing in this
        interface is rounded, and a favicon cannot count on a font being there.
-       The two media apply here too, so the mark holds on either tab bar.
-       Same stroke and same 2.5..12.5 extent as the U it replaces — the O is
-       that letter closed at the top, so the lineage survives the rename. -->
-  <style>
-    path { stroke: #c8c8cc; }
-    @media (prefers-color-scheme: light) { path { stroke: #2a2a2e; } }
-  </style>
-  <path d="M4 2.5 H12 V12.5 H4 Z" fill="none" stroke-width="2" />
+       The O is the U closed at the top, so the lineage survives the rename.
+
+       Rest ink, not the strike white. Keraunos draws a single arrival and is
+       entitled to full white; this is the wordmark, which on the page is text
+       ink under `.glow`, so the letter sits at that same #c8c8cc over the same
+       bloom. The counter is 12.6 wide at 32 — under 6px at a tab bar,
+       which is the floor before the middle fills in and the O reads as a
+       solid slab. -->
+  <defs>
+    <radialGradient id="bloom" cx="50%" cy="46%" r="50%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.2" />
+      <stop offset="55%" stop-color="#fff" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="32" height="32" rx="7" fill="#0a0a0b" />
+  <circle cx="16" cy="15" r="14" fill="url(#bloom)" />
+
+  <!-- Centreline of the stroke, so the letter runs 8..24 by 5.5..26.5 — the
+       same taller-than-wide proportion the wordmark's O has. -->
+  <path d="M9.6 7.1 H22.4 V24.9 H9.6 Z" fill="none" stroke="#c8c8cc" stroke-width="3.2" />
+
+  <rect x="0.5" y="0.5" width="31" height="31" rx="6.5" fill="none" stroke="#ffffff" stroke-opacity="0.1" />
 </svg>
