@@ -24,10 +24,15 @@
   border-bottom: 1px solid var(--c-line);
 }
 
+/* The wordmark is the page's heading, so it is one. Both children set their
+   own size and weight; these two only stop the `h1` defaults from reaching the
+   caption beside it. */
 .mark {
   display: flex;
   align-items: baseline;
   gap: 10px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .wordmark {
@@ -194,6 +199,12 @@ a.label:hover {
     text-shadow 140ms linear;
 }
 
+/* Held at full white through its delay, so the set warms up together and locks
+   on in order rather than each name flashing after sitting cold. */
+.name.settle {
+  animation-fill-mode: backwards;
+}
+
 .etym {
   color: var(--c-dim);
   margin-left: 12px;
@@ -276,6 +287,7 @@ a.label:hover {
    running rather than as dead. */
 .record[data-status='live'] .dot {
   background: var(--c-text);
+  animation: breathe 2.8s ease-in-out infinite;
 }
 
 .record.tuned[data-status='live'] .dot {

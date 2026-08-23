@@ -27,6 +27,13 @@ export function current() {
    panel it had given up, and it is fixed where the records are drawn. */
 function set(theme) {
   document.documentElement.dataset.theme = theme;
+  // The browser chrome is part of the medium: it follows the palette rather
+  // than the system, which the reader is allowed to overrule.
+  document.querySelector('meta[name=theme-color]').content = getComputedStyle(
+    document.documentElement
+  )
+    .getPropertyValue('--c-void')
+    .trim();
   return theme;
 }
 

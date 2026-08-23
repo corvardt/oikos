@@ -57,8 +57,19 @@ const rows = [...list.querySelectorAll('.record:not(.vacant)')];
 
 // `data-status` drives the indicator, so it is set once from the data rather
 // than baked into the markup string in two places.
+//
+// The names also arrive under the decay rule, one channel behind the last, so
+// the set reads as locking on rather than as having always been there. The
+// class is dropped when the animation ends: the tuned record is on its way to
+// white, and letting it get there through its own transition keeps it from
+// snapping the moment the decay lets go.
 rows.forEach((row, i) => {
   row.dataset.status = tunable[i].status;
+
+  const name = row.querySelector('.name');
+  name.style.animationDelay = `${i * 60}ms`;
+  name.classList.add('settle');
+  name.addEventListener('animationend', () => name.classList.remove('settle'), { once: true });
 });
 
 const live = tunable.filter((s) => s.status === 'live').length;
@@ -117,9 +128,14 @@ function setMedium(theme) {
   label(theme);
 }
 
+// A button is named for what it does, not for where it already is, so the
+// control carries the medium it would hand you. The visible word has to sit
+// inside the accessible name for voice control to reach it, so both are drawn
+// from the same one.
 function label(theme) {
-  medium.textContent = theme;
-  medium.setAttribute('aria-label', `switch to ${theme === 'dark' ? 'light' : 'dark'}`);
+  const other = theme === 'dark' ? 'light' : 'dark';
+  medium.textContent = other;
+  medium.setAttribute('aria-label', `switch to ${other}`);
 }
 
 label(current());

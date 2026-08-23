@@ -10,8 +10,10 @@
          corners. -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#dedee0" media="(prefers-color-scheme: light)" />
+    <!-- One tag, not one per scheme: the reader's choice is a cookie that can
+         disagree with the system, and a media-gated tag cannot see it. The
+         inline script below sets it from the palette that actually won. -->
+    <meta name="theme-color" content="#0a0a0b" />
     <meta name="description" content="oikos · a collection of projects and experiments." />
     <title>Oikos</title>
 
@@ -47,19 +49,26 @@
         var m = document.cookie.match(/(?:^|;\s*)corvardt-theme=(dark|light)/);
         var t = m ? m[1] : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         document.documentElement.dataset.theme = t;
+        // Read back off the palette rather than repeating its hexes here. This
+        // script runs after the stylesheets, so `--c-void` is already resolved.
+        document.querySelector('meta[name=theme-color]').content = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue('--c-void').trim();
       })();
     </script>
   </head>
   <body>
     <div class="tube">
       <header class="head">
-        <div class="mark">
+        <h1 class="mark">
           <span class="wordmark glow">OIKOS</span>
           <span class="label">&#47;&#47; index</span>
-        </div>
+        </h1>
 
         <nav class="controls">
-          <button type="button" class="label" data-medium>dark</button>
+          <!-- The medium it would switch you to. Dark is the default, so the
+               control offers light until the script reads the real one. -->
+          <button type="button" class="label" data-medium aria-label="switch to light">light</button>
           <span class="rule" aria-hidden="true"></span>
           <a class="label" href="https://github.com/corvardt" target="_blank" rel="noreferrer">src</a>
           <a class="label" href="https://twitter.com/corvardt" target="_blank" rel="noreferrer">x</a>
@@ -98,6 +107,7 @@
         <span class="label" data-count></span>
         <span class="keys" aria-hidden="true">
           <kbd>↑↓ tune</kbd>
+          <kbd>1-9 jump</kbd>
           <kbd>↵ open</kbd>
           <kbd>t medium</kbd>
         </span>
