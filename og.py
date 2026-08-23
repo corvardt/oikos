@@ -157,7 +157,7 @@ def build():
     ticks(draw, (MARGIN, MARGIN, W - MARGIN, H - MARGIN))
     glass(card)
 
-    out = ROOT / "og.png"
+    out = ROOT / "assets" / "og.png"
     card.convert("RGB").save(out, optimize=True)
     print(f"{out.name} — {total} channels, {live} live, {out.stat().st_size // 1024}KB")
 
