@@ -100,6 +100,11 @@
   --vignette: rgba(0, 0, 0, 0.62);
   --bloom: rgba(255, 255, 255, 0.14);
   --bloom-hot: rgba(255, 255, 255, 0.3);
+  /* Its own token, not the sweep's. A broad field needs several times the
+     alpha of a narrow band to read at all, and the two are tuned by eye on a
+     real display — turn this down if the glass starts to look dirty rather
+     than uneven. */
+  --drift: rgba(255, 255, 255, 0.055);
 }
 
 /* ── Light ──────────────────────────────────────────────────────────────────
@@ -125,6 +130,9 @@
   /* Ink bleeds into paper fibres rather than glowing. */
   --bloom: rgba(0, 0, 0, 0.16);
   --bloom-hot: rgba(0, 0, 0, 0.28);
+  /* Stock is not evenly lit either, but paper shows a shadow sooner than a
+     tube shows a bloom, so it takes less. */
+  --drift: rgba(0, 0, 0, 0.04);
 }
 
 *,
@@ -260,6 +268,70 @@ body {
   animation: refresh-sweep 7.5s linear infinite;
 }
 
+/* ── Phosphor drift ─────────────────────────────────────────────────────────
+   A tube does not emit evenly. Two very soft blooms wander the glass on
+   periods that do not divide into each other, so the brightness across the
+   page is never flat and never quite repeats — the sweep passing over an
+   unevenness rather than over a blank.
+
+   Transform only. These are full-viewport layers, and animating anything that
+   repaints would hand the compositor the whole page on every frame; an
+   animated transform gets a layer of its own and costs nearly nothing. They
+   sit under the scanlines and the vignette, which is the order the glass is
+   built in. */
+.crt-drift {
+  position: absolute;
+  inset: 0;
+}
+
+.crt-drift::before,
+.crt-drift::after {
+  content: '';
+  position: absolute;
+  /* Wide enough to have no edge on screen, tight enough that the falloff still
+     changes from one side of the page to the other. Spread it much further and
+     the gradient per pixel drops under what a display can show, which is a
+     bloom that is technically there and invisible. */
+  width: 75vmax;
+  height: 75vmax;
+  background: radial-gradient(closest-side, var(--drift), transparent);
+  animation: drift-a 37s ease-in-out infinite alternate;
+}
+
+/* Held off the corners: the vignette is at its heaviest there and would eat
+   most of what these are for. */
+.crt-drift::before {
+  top: -22vmax;
+  left: -18vmax;
+}
+
+.crt-drift::after {
+  bottom: -22vmax;
+  right: -18vmax;
+  animation-name: drift-b;
+  animation-duration: 53s;
+}
+
+/* Two vectors rather than one run backwards: parallel blooms read as a single
+   layer sliding, crossing ones read as the tube being uneven. */
+@keyframes drift-a {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(26vmax, 16vmax, 0);
+  }
+}
+
+@keyframes drift-b {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-21vmax, 13vmax, 0);
+  }
+}
+
 /* ── HUD frame ──────────────────────────────────────────────────────────────
    Corner ticks instead of full borders: the frame reads as an instrument
    bezel and leaves the edges open. */
@@ -322,7 +394,9 @@ body {
   .settle,
   .breathe,
   .seek,
-  .crt-sweep {
+  .crt-sweep,
+  .crt-drift::before,
+  .crt-drift::after {
     animation: none;
   }
 }
