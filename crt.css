@@ -104,7 +104,7 @@
      alpha of a narrow band to read at all, and the two are tuned by eye on a
      real display — turn this down if the glass starts to look dirty rather
      than uneven. */
-  --drift: rgba(255, 255, 255, 0.055);
+  --drift: rgba(255, 255, 255, 0.04);
 }
 
 /* ── Light ──────────────────────────────────────────────────────────────────
@@ -132,7 +132,7 @@
   --bloom-hot: rgba(0, 0, 0, 0.28);
   /* Stock is not evenly lit either, but paper shows a shadow sooner than a
      tube shows a bloom, so it takes less. */
-  --drift: rgba(0, 0, 0, 0.04);
+  --drift: rgba(0, 0, 0, 0.03);
 }
 
 *,
