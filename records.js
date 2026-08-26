@@ -41,4 +41,12 @@ export const RECORDS = [
     stack: 'python · gtk4',
     status: 'local',
   },
+  {
+    name: 'STEROPES',
+    etym: 'Στερόπης · the lightning-maker, who forged the bolt',
+    desc: 'Random numbers drawn from lightning. The low digits of where a strike landed are solver noise nobody can predict; the page collects them, grades them against four statistical tests in front of you, and deals coins, dice, decks and plates from strikes that have not happened yet.',
+    host: 'steropes.corvardt.com',
+    stack: 'javascript · websocket · canvas',
+    status: 'live',
+  },
 ];
