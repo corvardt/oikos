@@ -16,14 +16,12 @@ export const RECORDS = [
     status: 'live',
   },
   {
-    name: 'NOSTOS',
-    etym: 'νόστος · the homecoming',
-    desc: 'A media downloader that runs on your own machine. Paste a link, see what it is, queue it. Nothing is sent anywhere but the site you are pulling from.',
-    // It is not meant to be hosted, so the address is where the thing actually
-    // is: the repository you clone it from.
-    host: 'github.com/corvardt/nostos',
-    stack: 'python · fastapi · react · yt-dlp',
-    status: 'local',
+    name: 'STEROPES',
+    etym: 'Στερόπης · the lightning-maker, who forged the bolt',
+    desc: 'Random numbers drawn from lightning. The low digits of where a strike landed are solver noise nobody can predict; the page collects them, grades them against four statistical tests in front of you, and deals coins, dice, decks and plates from strikes that have not happened yet.',
+    host: 'steropes.corvardt.com',
+    stack: 'javascript · websocket · canvas',
+    status: 'live',
   },
   {
     name: 'TYCHE',
@@ -42,11 +40,13 @@ export const RECORDS = [
     status: 'local',
   },
   {
-    name: 'STEROPES',
-    etym: 'Στερόπης · the lightning-maker, who forged the bolt',
-    desc: 'Random numbers drawn from lightning. The low digits of where a strike landed are solver noise nobody can predict; the page collects them, grades them against four statistical tests in front of you, and deals coins, dice, decks and plates from strikes that have not happened yet.',
-    host: 'steropes.corvardt.com',
-    stack: 'javascript · websocket · canvas',
-    status: 'live',
+    name: 'NOSTOS',
+    etym: 'νόστος · the homecoming',
+    desc: 'A media downloader that runs on your own machine. Paste a link, see what it is, queue it. Nothing is sent anywhere but the site you are pulling from.',
+    // It is not meant to be hosted, so the address is where the thing actually
+    // is: the repository you clone it from.
+    host: 'github.com/corvardt/nostos',
+    stack: 'python · fastapi · react · yt-dlp',
+    status: 'local',
   },
 ];

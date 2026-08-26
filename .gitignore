@@ -1,3 +1,7 @@
 .DS_Store
 .directory
 *.zip
+
+# The build notes: how the tube is put together, how to add a station.
+# Local only, not part of what is published.
+NOTES.md

@@ -107,11 +107,12 @@ def build():
 
     # ── Stations ────────────────────────────────────────────────────────────
     # The band between the rules is fixed, so the catalogue sets the pitch
-    # rather than the other way round: rows tighten as stations are added, and
-    # past four the card stops listing and lets the tally speak for the rest.
+    # rather than the other way round: every station is listed and the rows
+    # tighten as they are added. The band holds six before the names begin to
+    # crowd; past that the card needs a cap and the tally to carry the rest.
     entries = records()
     top, bottom = 262, H - 168
-    shown = entries[:4]
+    shown = entries
     pitch = min(84, (bottom - top) // max(len(shown), 1))
     y = top + ((bottom - top) - pitch * len(shown)) // 2 + 6
 
