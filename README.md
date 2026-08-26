@@ -30,9 +30,14 @@ Point at a record to tune it, click to open it.
 | `1`–`9` | jump to a channel |
 | `↵` | open |
 | `t` | switch medium |
+| `c` | configuration |
 
 `dark` is phosphor on black, `light` is ink on chart stock. The choice follows
 you into every project on the domain.
+
+`cfg` holds it, and holds the three pieces of glass the tube is wearing: the
+scanlines, the refresh sweep and the phosphor drift. Those three are this page's
+own and stay here.
 
 Nothing is fetched from anyone else: no trackers, no analytics, no fonts from a
 third party. The page is static files served from one origin.

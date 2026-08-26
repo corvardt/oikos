@@ -43,6 +43,41 @@ export function apply(theme) {
   return set(theme);
 }
 
+/* ── The glass ───────────────────────────────────────────────────────────────
+   The three layers a reader can take off, the same three the set's instruments
+   offer. Unlike the medium these are this page's own decoration rather than a
+   property of the domain, so they live in localStorage: a reader who wants a
+   flat tube here has not asked for a flat tube everywhere.
+
+   Attributes rather than a class on each layer: `crt.css` owns what they look
+   like, and this only says whether the tube is wearing them.
+
+   Restored here rather than in the head script, where the medium is resolved:
+   they are decoration and can arrive a frame late. */
+
+export const GLASS = ['scanlines', 'sweep', 'drift'];
+
+export const glass = (part) => {
+  try {
+    return localStorage.getItem(part) !== 'off';
+  } catch {
+    return true;
+  }
+};
+
+export function applyGlass(part, on) {
+  document.documentElement.dataset[part] = on ? 'on' : 'off';
+  try {
+    localStorage.setItem(part, on ? 'on' : 'off');
+  } catch {
+    // Storage disabled. The tube still changes; it just will not be there next
+    // time, which is the whole of what is lost.
+  }
+  return on;
+}
+
+for (const part of GLASS) applyGlass(part, glass(part));
+
 /** Follow the system for as long as the reader hasn't expressed a preference. */
 export function followSystem(onChange) {
   if (document.cookie.includes(`${KEY}=`)) return;

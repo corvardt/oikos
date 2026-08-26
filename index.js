@@ -5,10 +5,11 @@
    set anything off. */
 
 import { RECORDS } from './records.js';
-import { apply, current, followSystem } from './theme.js';
+import { applyGlass, apply, current, followSystem, glass } from './theme.js';
 
 const list = document.querySelector('.records');
 const medium = document.querySelector('[data-medium]');
+const cfg = document.getElementById('cfg');
 const count = document.querySelector('[data-count]');
 
 // Vacant slots hold a channel number but can never be tuned.
@@ -100,6 +101,10 @@ rows.forEach((row, i) => {
 // ── Keys ───────────────────────────────────────────────────────────────────
 document.addEventListener('keydown', (event) => {
   if (event.metaKey || event.ctrlKey || event.altKey) return;
+  // The panel is modal, and Escape is the browser's. Nothing here tunes while
+  // it is open, or a reader arrowing between two choices would be moving the
+  // list behind them at the same time.
+  if (cfg.open) return;
   const key = event.key;
 
   if (key === 'ArrowDown' || key === 'j') {
@@ -114,6 +119,8 @@ document.addEventListener('keydown', (event) => {
     if (!rows.includes(document.activeElement)) rows[tuned].click();
   } else if (key === 't') {
     setMedium(current() === 'dark' ? 'light' : 'dark');
+  } else if (key === 'c') {
+    openCfg();
   } else if (/^[1-9]$/.test(key)) {
     // Channel numbers address every slot, so a vacant one is simply ignored.
     const index = rows.findIndex((row) => row.dataset.channel === key);
@@ -126,6 +133,7 @@ document.addEventListener('keydown', (event) => {
 function setMedium(theme) {
   apply(theme);
   label(theme);
+  markSettings();
 }
 
 // A button is named for what it does, not for where it already is, so the
@@ -140,4 +148,62 @@ function label(theme) {
 
 label(current());
 medium.addEventListener('click', () => setMedium(current() === 'dark' ? 'light' : 'dark'));
-followSystem(label);
+followSystem((theme) => {
+  label(theme);
+  markSettings();
+});
+
+// ── Configuration ──────────────────────────────────────────────────────────
+//
+// The bezel keeps the medium, because it is the one setting a reader comes back
+// to; everything else that is set rather than reported is in here. A real
+// <dialog>, so the backdrop, Escape and the focus trap are the browser's.
+
+/** Every row says which of its choices is on. */
+function markSettings() {
+  const mark = (button, on) => {
+    button.setAttribute('aria-pressed', String(on));
+    button.classList.toggle('glow', on);
+  };
+  for (const b of cfg.querySelectorAll('[data-medium-choice]')) {
+    mark(b, b.dataset.mediumChoice === current());
+  }
+  for (const b of cfg.querySelectorAll('[data-glass-choice]')) {
+    mark(b, b.dataset.glassChoice === (glass(b.dataset.glass) ? 'on' : 'off'));
+  }
+}
+
+cfg.addEventListener('click', (event) => {
+  const pressed = event.target.closest('button');
+  if (!pressed) return;
+  if (pressed.dataset.mediumChoice) setMedium(pressed.dataset.mediumChoice);
+  else if (pressed.dataset.glassChoice) {
+    applyGlass(pressed.dataset.glass, pressed.dataset.glassChoice === 'on');
+    markSettings();
+  } else cfg.close();
+});
+
+// Clicking the ground outside the panel dismisses it. The dialog's own box is
+// the only thing inside it, so a click that lands on the dialog element itself
+// landed on the backdrop.
+cfg.addEventListener('mousedown', (event) => {
+  if (event.target === cfg) cfg.close();
+});
+
+/* The sheet's glass is display:none until the dialog opens, so its sweep and
+   its drift start from zero every time. Wound forward to where the page's own
+   glass has got to, the pane the reader was already looking at simply carries
+   on: the markup is identical, so the animations come back in the same order. */
+const pageGlass = document.querySelector('body > .crt');
+const sheetGlass = document.getElementById('cfg-glass');
+
+function openCfg() {
+  markSettings();
+  cfg.showModal();
+  const page = pageGlass.getAnimations({ subtree: true });
+  sheetGlass.getAnimations({ subtree: true }).forEach((animation, i) => {
+    if (page[i]) animation.currentTime = page[i].currentTime;
+  });
+}
+
+document.getElementById('cfg-open').addEventListener('click', openCfg);

@@ -354,6 +354,144 @@ a.label:hover {
   color: var(--c-land);
 }
 
+/* ── Configuration ──────────────────────────────────────────────────────────
+   The set's panel, on the index. Everything modal about it — the ground behind,
+   Escape, keeping Tab inside — is the browser's, which is most of why it is a
+   <dialog> and not another div. */
+.sheet {
+  /* What centres a modal dialog: the UA sets `inset: 0` and this, and the
+     medium's reset zeroes every margin on the page, this one included. Without
+     it the panel sits in the top-left corner. */
+  margin: auto;
+  width: min(30rem, calc(100% - 3rem));
+  max-height: calc(100% - 6rem);
+  overflow-y: auto;
+  color: var(--c-text);
+  background: var(--c-panel);
+  border: 1px solid var(--c-line);
+  /* Nothing on the panel itself: it is a stack of ruled sections, and each one
+     carries its own. */
+  padding: 0;
+}
+
+.sheet::backdrop {
+  background: color-mix(in srgb, var(--c-void) 72%, transparent);
+}
+
+/* One pane at a time: the sheet carries its own, and it covers the same
+   viewport from inside the top layer. */
+body:has(.sheet[open]) > .crt {
+  visibility: hidden;
+}
+
+/* The panel's own bezel row, ruled off from what it holds and staying put if
+   the panel ever holds more than one screen of settings. */
+.card-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--c-panel);
+  border-bottom: 1px solid var(--c-line);
+}
+
+/* The title names the panel rather than labelling a value, so it takes the
+   wordmark's spacing and the text colour, not a caption's. */
+.card-label {
+  font-size: 10px;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--c-text);
+}
+
+.group {
+  padding: 0.75rem 1.25rem;
+}
+
+.group + .group {
+  border-top: 1px solid var(--c-line);
+}
+
+/* A caption trailed by a rule, the series' section break. */
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding-bottom: 0.25rem;
+}
+
+.group-head span {
+  font-size: 10px;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--c-dim);
+  flex-shrink: 0;
+}
+
+.group-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--c-line);
+}
+
+/* The name of a setting and its control: caption on the left, the choices
+   right-aligned to the edge every other row in the panel ends at. The shape
+   every instrument in the set presents a setting in. */
+.set {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0;
+}
+
+.set > span {
+  flex-shrink: 0;
+  font-size: 10px;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--c-dim);
+}
+
+/* Bare labels, not boxes. Every control on this page is a small caps word that
+   lights when you point at it, and the panel is not where that stops being
+   true. Wrapping rather than overflowing: a row running off the edge of the
+   panel is worse than a second line. */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* The one that is on is simply lit, which is how a held control is marked
+   everywhere else on the page. */
+.choices .label[aria-pressed='true'] {
+  color: var(--c-text);
+}
+
+.note {
+  max-width: 46ch;
+  font-size: 11px;
+  line-height: 20px;
+  color: var(--c-dim);
+  margin-top: 0.5rem;
+}
+
+.note b {
+  font-weight: 400;
+  color: var(--c-text);
+}
+
 @media (max-width: 620px) {
   /* The plate stays beside the text at every width; it only gets smaller. */
   .operator {
