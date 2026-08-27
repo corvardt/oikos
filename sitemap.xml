@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The index and the stations that answer at their own host. Local records
+     live in their repositories and are not this domain's to list. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://corvardt.com/</loc></url>
+  <url><loc>https://keraunos.corvardt.com/</loc></url>
+  <url><loc>https://steropes.corvardt.com/</loc></url>
+  <url><loc>https://tyche.corvardt.com/</loc></url>
+</urlset>

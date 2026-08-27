@@ -1,0 +1,13 @@
+# The creed, enforced rather than promised: nothing on this page may reach an
+# origin that is not this one. `default-src 'none'` means every fetch the page
+# could make is denied unless named below, and none of them may leave the host.
+#
+# The hash is of the medium script in the head, which is inline because it has
+# to run before first paint and cannot afford a round trip. 404.html carries
+# the same script byte for byte so one hash covers both; if you edit it, edit
+# both and recompute:
+#   python3 -c "import re,hashlib,base64;s=re.search(r'<script>(.*?)</script>',open('index.html').read(),re.S).group(1);print(base64.b64encode(hashlib.sha256(s.encode()).digest()).decode())"
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'sha256-hep9FHkKoCf30xcM978EzDDumHhSmdNp5PHMobcBbQg='; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer

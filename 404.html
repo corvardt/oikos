@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/glyph.svg" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <meta name="robots" content="noindex" />
+    <title>Oikos // no station</title>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-400-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-mono-600-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="/crt.css" />
+    <link rel="stylesheet" href="/index.css" />
+    <!-- Byte for byte the index's, so the one script hash in `_headers` covers
+         this page too. Edit one, edit both. -->
+    <script>
+      // Resolve the medium before first paint so the tube never flashes on
+      // paper. The cookie is written on `.corvardt.com`, so a choice made on any
+      // project carries here and back again.
+      (function () {
+        var m = document.cookie.match(/(?:^|;\s*)corvardt-theme=(dark|light)/);
+        var t = m ? m[1] : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t;
+        // Read back off the palette rather than repeating its hexes here. This
+        // script runs after the stylesheets, so `--c-void` is already resolved.
+        document.querySelector('meta[name=theme-color]').content = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue('--c-void').trim();
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="tube">
+      <header class="head">
+        <h1 class="mark">
+          <span class="wordmark glow">OIKOS</span>
+          <span class="label">&#47;&#47; no station</span>
+        </h1>
+        <nav class="controls">
+          <a class="label" href="/">index</a>
+        </nav>
+      </header>
+
+      <main>
+        <ul class="records">
+          <li>
+            <div class="record vacant">
+              <span class="channel">--</span>
+              <div>
+                <span class="name">no station</span>
+                <p class="desc">Nothing is tuned to this address. The catalogue is on the index.</p>
+              </div>
+              <span class="state"></span>
+            </div>
+          </li>
+        </ul>
+      </main>
+
+      <footer class="footer">
+        <span class="label">404</span>
+      </footer>
+    </div>
+
+    <!-- The glass. Above everything, catches nothing. -->
+    <div class="crt" aria-hidden="true">
+      <div class="crt-drift"></div>
+      <div class="crt-sweep"></div>
+      <div class="crt-scanlines"></div>
+      <div class="crt-vignette"></div>
+    </div>
+
+    <!-- For the glass the reader took off. Nothing else on this page is set. -->
+    <script type="module" src="/theme.js"></script>
+  </body>
+</html>
