@@ -57,11 +57,15 @@ export function apply(theme) {
 
 export const GLASS = ['scanlines', 'sweep', 'drift'];
 
+/* The drift is the one that ships off: it is the faintest layer and the most
+   expensive to composite, so it is opt-in and the markup already carries
+   `data-drift='off'` for the frame before this runs. */
 export const glass = (part) => {
   try {
-    return localStorage.getItem(part) !== 'off';
+    const stored = localStorage.getItem(part);
+    return part === 'drift' ? stored === 'on' : stored !== 'off';
   } catch {
-    return true;
+    return part !== 'drift';
   }
 };
 
