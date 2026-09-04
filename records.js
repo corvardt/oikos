@@ -18,7 +18,7 @@ export const RECORDS = [
   {
     name: 'STEROPES',
     etym: 'Στερόπης · the lightning-maker, who forged the bolt',
-    desc: 'Random numbers drawn from lightning. The low digits of where a strike landed are solver noise nobody can predict; the page collects them, grades them against four statistical tests in front of you, and deals coins, dice, decks and plates from strikes that have not happened yet.',
+    desc: 'Random numbers drawn from lightning. Where a strike landed is solver noise nobody can predict, graded against four statistical tests in front of you and dealt as coins, dice, decks and plates.',
     host: 'steropes.corvardt.com',
     stack: 'javascript · websocket · canvas',
     status: 'live',
@@ -34,7 +34,7 @@ export const RECORDS = [
   {
     name: 'KLEPSYDRA',
     etym: 'κλεψύδρα · the water clock, the allotted time draining',
-    desc: 'An always-on desktop card that reads your Claude usage off your own machine: the rolling window, the burn rate, where the block lands. Six hundred lines of plain Python, auditable in one sitting.',
+    desc: 'An always-on desktop card that reads your Claude usage off your own machine: the rolling window, the burn rate, where the block lands. Under two thousand lines of plain Python, auditable in one sitting.',
     host: 'github.com/corvardt/klepsydra',
     stack: 'python · gtk4',
     status: 'local',
